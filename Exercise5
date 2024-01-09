@@ -1,0 +1,22 @@
+import pandas as pd
+df = pd.read_csv('/Users/arjun/Documents/Lab-Programs/5thSemLab/MachineLearning/Datasets/pokemon.csv')
+print(df)
+
+#Transforming nominal features
+nominal_feature = ["Generation"]
+df_nominal = pd.get_dummies(df[nominal_feature])
+print(df_nominal)
+
+#Transforming Ordinal Features
+gen_ord_map = {
+        1:'Gen1', 2:'Gen2', 3:'Gen3',
+        4:'Gen4', 5:'Gen5', 6:'Gen6'
+}
+df["Generation Labels"] = df["Generation"].map(gen_ord_map)
+
+# Encoding categorical features using one-hot encoding scheme
+categorical_features = ['Generation', 'Legendary']
+df_encoded = pd.get_dummies(df[categorical_features])
+
+df_transformed = pd.concat([df, df_nominal, df_encoded], axis=1)
+print("df_transformed", df_transformed)
