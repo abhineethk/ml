@@ -1,0 +1,20 @@
+import pandas as pd 
+from sklearn_extra.cluster import KMedoids
+from sklearn.preprocessing import MinMaxScaler
+
+df = pd.read_csv("/Users/arjun/Documents/Lab-Programs/5thSemLab/MachineLearning/Datasets/breast-cancer-wisconsin.csv")
+print(df)
+
+features = df[['perimeter_mean', 'smoothness_mean', 'compactness_mean', 'concavity_mean', 'concave points_mean', 'perimeter_worst']]
+
+scalar = MinMaxScaler()
+features_scaled = scalar.fit_transform(features)
+
+k=2
+kmed = KMedoids(n_clusters=k, random_state=42)
+kmed.fit(features_scaled)
+
+labels = kmed.labels_
+
+df["Cluster"] = labels
+print("Cluster", df["Cluster"])
