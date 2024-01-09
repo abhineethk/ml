@@ -1,0 +1,13 @@
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import pandas as pd
+
+mydata = pd.read_csv("~/Documents/Lab-Programs/5thSemLab/MachineLearning/Datasets/Iris_data.csv")
+scalar = StandardScaler()
+scaled_data = pd.DataFrame(scalar.fit_transform(mydata))
+print("Scaled Data", scaled_data)
+pca = PCA(n_components = 2)
+pca.fit(mydata)
+data_pca = pca.transform(mydata)
+data_pca = pd.DataFrame(data_pca, columns=['PC1', 'PC2'])
+print(data_pca)
