@@ -1,0 +1,30 @@
+import pandas as pd
+import datetime
+import random
+num_records = 30
+
+dates = pd.date_range(start="2021-01-01", end="2021-12-31", periods=num_records)
+price = [round(random.uniform(10,100),2) for _ in range(num_records)]
+product_id = [random.randint(10, 100) for _ in range(num_records)]
+quantity_purchased = [random.randint(1, 10) for _ in range(num_records)]
+serial_nos = [ f'SN-{random.randint(1000,9999)}' for _ in range(num_records)]
+user_id = ['U' + str(random.randint(10,30)) for _ in range(num_records)]
+user_type = ["Retail", "Wholesale"]
+user_classes = ["User A", "User B", "User B"]
+purchase_weeks = [date.isocalendar()[1] for date in dates]
+
+#creating a dictonary
+data = {
+    "Date" : dates,
+    "Price" : price,
+    "Product ID" : product_id,
+    "Quantity Purchased" : quantity_purchased,
+    "Serial No" : serial_nos,
+    "User ID" : user_id,
+    "User Type" : random.choices(user_type, k=num_records),
+    "User Class" : random.choices(user_classes, k=num_records),
+    "Purchased Week" : purchase_weeks
+}
+
+df = pd.DataFrame(data)
+print("DataFrame", df.head)
