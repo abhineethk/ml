@@ -1,0 +1,32 @@
+import pandas as pd
+import random
+import datetime
+
+num_records = 30
+
+dates = pd.date_range(start='2021-01-01', end='2021-12-31', periods=num_records)
+price = [round(random.uniform(10,100),2) for _ in range(num_records)]
+product_id = [random.randint(10,100) for _ in range(num_records)]
+quantity_purchased = [random.randint(1,20) for _ in range(num_records)]
+serial_no = [f'SN-{random.randint(1000,9999)}' for _ in range(num_records)]
+user_id = [ 'U' + str(random.randint(10,30)) for _ in range(num_records)]
+user_type = ["Reatailer", "Wholesale"]
+user_class = ["Class A", "Class B", "Class C", "Class D"]
+purchased_week = [date.isocalendar()[1] for date in dates]
+                  
+data = {
+    "Date" : dates,
+    "Price" : price,
+    "Product" : product_id,
+    "Quantity Purchased" : quantity_purchased,
+    "Serial NO" : serial_no,
+    "User ID" : user_id,
+    "User Type" : random.choices(user_type, k=num_records),
+    "User Class" : random.choices(user_class, k=num_records),
+    "Purchased Week" : purchased_week
+}
+                  
+df = pd.DataFrame(data)
+print(df)
+#Saving to csv
+df.to_csv("customer_dataset.csv", index=False)
