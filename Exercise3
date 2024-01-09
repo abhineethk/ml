@@ -1,0 +1,5 @@
+import pandas as pd
+import numpy as np
+from scipy import stats
+
+df = pd.read_csv("/Users/arjun/Documents/Lab-Programs/5thSemLab/MachineLearning/Datasets/bank-data.csv")
