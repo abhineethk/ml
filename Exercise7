@@ -1,0 +1,29 @@
+from sklearn.datasets import load_wine
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.model_selection import train_test_split
+
+wine = load_wine()
+X = wine.data
+y = wine.target
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+#Creating a logistic regression classifier
+logistic_regression = LogisticRegression()
+
+#Train classsifer
+logistic_regression.fit(X_train, y_train)
+
+#Prediction on test set
+y_pred = logistic_regression.predict(X_test)
+
+#accuracy
+print("Accuracy:", accuracy_score(y_test, y_pred))
+
+#confusion matrix
+print("Confusion matrix: \n", confusion_matrix(y_test, y_pred))
+
+#classification_report
+print("Classification Report: \n", classification_report(y_test, y_pred))
