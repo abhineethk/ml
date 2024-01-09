@@ -1,0 +1,18 @@
+import pandas as pd
+from sklearn.cluster import KMeans
+
+df = pd.read_csv("/Users/arjun/Documents/Lab-Programs/5thSemLab/MachineLearning/Datasets/breast-cancer-wisconsin.csv")
+df.drop("id",axis=1)
+
+#print(df)
+feature = df[['concavity_mean', 'perimeter_mean', 'area_mean', 'smoothness_mean', 
+              'compactness_mean', 'concave points_mean', 'radius_worst']]
+k = 2
+kmeans = KMeans(n_clusters=k, random_state=42)
+kmeans.fit(feature)
+
+labels = kmeans.labels_
+
+df['Clusters'] = labels
+print(df["Clusters"])
+print('DF',df)
